@@ -1,0 +1,149 @@
+\documentclass{article}
+
+\usepackage{amsmath, amssymb} %standard packages for math writing
+%\usepackage{mathpazo} % a better font than the default one
+%\usepackage{amsthm}
+\usepackage{bm} %bold math
+\usepackage{upgreek} %add special greek symbols
+\usepackage{bbold}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage{graphicx}%include figure files
+\usepackage{float}
+\usepackage{ntheorem}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks, linkcolor=blue, anchorcolor=blue, citecolor=blue, urlcolor=blue]{hyperref} % add hypertext
+\usepackage[perpage,symbol*]{footmisc}
+
+\geometry{a4paper, centering, scale=0.8}
+
+\def\RR{\mathbb{R}}
+\def\dd{\mathrm{d}}
+\def\1{\mathbb{1}}
+
+\newcommand{\ww}[1]{\textcolor{red}{\bf~[Notice:~#1]~}}	% My comments
+\newcommand{\referee}[1]{\textcolor{blue}{\textit{#1~\\}}}	% referee comments
+\newcommand{\vv}{\boldsymbol}
+
+\newenvironment{proof}{\emph{Proof.}}{\hfill $\square$\par}
+
+\theoremindent1.4em
+\newtheorem{definition}[subsection]{Definition}
+
+\definecolor{browna}{rgb}{0.76,0.72,0.65}
+\definecolor{brownb}{rgb}{0.71,0.69,0.65}
+
+\newtcbtheorem[no counter]{theorem}{Theorem}{
+  enhanced,
+  sharp corners,
+  attach boxed title to top left={
+    yshifttext=-1mm
+  },
+  colback=white,
+  colframe=browna,
+  fonttitle=\bfseries,
+  boxed title style={
+    sharp corners,
+    size=small,
+    colback=browna,
+    colframe=browna,
+  } 
+}{thm}
+
+\newtcbtheorem[number within=section]{example}{Example}{
+  enhanced,
+  sharp corners,
+  attach boxed title to top left={
+    yshifttext=-1mm
+  },
+  colback=white,
+  colframe=brownb,
+  fonttitle=\bfseries,
+  boxed title style={
+    sharp corners,
+    size=small,
+    colback=brownb,
+    colframe=brownb,
+  } 
+}{exm}
+
+\definecolor{backblue}{rgb}{0.84,0.91,0.94}
+\definecolor{leftblue}{rgb}{0,0.40,0.62}
+
+\newtcbtheorem{prop}{Proposition}{
+  coltitle=black,
+  colback=backblue,
+  colframe=leftblue,
+  fonttitle=\bfseries,
+  detach title,
+  boxrule=-0.1pt,
+  leftrule=2pt,
+  attach title to upper,
+  sharp corners,
+  left=3mm,
+}{claim}
+
+%
+%  Created by WW on 05/25/21
+%  Copyright © WW. All rights reserved.
+%
+\begin{document}
+\section{Templates for theorems}
+\hangafter 1
+\hangindent 1.7em
+\noindent 1. The usual theorem environment is like:
+\begin{definition}
+    $\1$ is unit matrix.
+\end{definition}
+
+\hangafter 1
+\hangindent 1.7em
+\indent we can contruct a better one
+\begin{theorem}[label=th:2]{Newton's second law}{this is some notes about the theorem which won't show up}
+    Equation of motion:
+    $$\vv F=m\vv a,$$
+    where $m$ is the mass, $\vv F$ is the force, and $\vv a$ is the acceleration.
+\end{theorem}
+or
+\begin{theorem}{1.1}{}
+    \textbf{Newton's second law.} Equation of motion:
+    $$\vv F=m\vv a,$$
+    where $m$ is the mass, $\vv F$ is the force, and $\vv a$ is the acceleration.
+\end{theorem}
+
+\section{Templates for examples}
+\hangafter 1
+\hangindent 1.7em
+\indent 1. Set \textbf{[number within=section]} in the preamble, and use package \textbf{hyperref}.
+\begin{example}[label=ex:1]{This is tilte}{}
+    We can see that this example was numbered automatically. 
+\end{example}
+We can label and cite Example \ref{ex:1} in this way. 
+\begin{example}{}{}
+    The title can also be left empty. Note that the `:' vanished magically.
+\end{example}
+\begin{example*}{}{}
+    This theorem environment is not numbered by adding a *.
+\end{example*}
+we can also adjust the indentaion:
+\begin{example*}[before={\vspace{0.5em}\par\parindent=1.2em}, width=\linewidth-1.2em]{}{}
+    [before=\{$\backslash$vspace\{0.5em\}$\backslash$par$\backslash$parindent=1.2em\}, width=$\backslash$linewidth-1.2em]
+\end{example*}
+
+\section{Templates for claims}
+\hangafter 1
+\hangindent 1.7em
+\indent 1. Another beautiful theorem environment\footnote{This is for foot notes.}:
+\begin{prop*}[before={\par\parindent=1.2em}, width=\linewidth-1.2em]{1}{}
+    \begin{equation*}
+        I\equiv\int_0^\infty\dd x~e^{ikx}=\frac{i}{k+i\epsilon}=\mathcal{P}\frac{i}{k}+\pi\delta(k),
+    \end{equation*}
+    where $\epsilon>0$.
+\end{prop*}
+\begin{proof}
+    To perform the integral, add in a small convergence factor, $e^{-\epsilon x}$ with $\epsilon>0$,
+    \begin{equation*}
+        I=\int_0^\infty\dd x~e^{-\epsilon x}e^{ikx}=\left.\frac{e^{(i(k-\epsilon))}}{ik-\epsilon}\right|_0^\infty=\frac{i}{k+i\epsilon}=\mathcal{P}\frac{i}{k}+\pi\delta(k).
+    \end{equation*}
+\end{proof}
+\end{document}
